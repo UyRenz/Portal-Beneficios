@@ -285,6 +285,15 @@ const vendors = [
     descuento:"25% OFF",
     descripcion:"Descuento en lentes graduados y de sol para colaboradores.",
     vigencia:"31 Dic 2026",
+    destacado:false,
+    imagen:"assets/img/optica.png"
+  }
+  {
+    nombre:"Óptica Visión",
+    categoria:"Salud",
+    descuento:"25% OFF",
+    descripcion:"Descuento en lentes graduados y de sol para colaboradores.",
+    vigencia:"31 Dic 2026",
     destacado:true,
     imagen:"assets/img/optica.png"
   }
@@ -359,7 +368,7 @@ function closeModal(){
   modal.style.display="none";
 }
 
-/* ================= THEME (IGUAL QUE TU REFERENCIA) ================= */
+/* ================= THEME ================= */
 (function(){
   const root = document.documentElement;
   const saved = localStorage.getItem('theme');
