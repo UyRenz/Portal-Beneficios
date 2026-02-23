@@ -145,13 +145,6 @@
         transform: translateY(-6px);
         border-color: var(--brand);
       }
-      .card img {
-        width: 100%;
-        height: 160px;
-        object-fit: cover;
-        border-radius: 12px;
-        margin-bottom: 12px;
-      }
       .badge {
         display: inline-block;
         font-size: 12px;
@@ -165,6 +158,7 @@
         font-size: 24px;
         font-weight: 700;
         margin: 10px 0;
+        color: var(--brand);
       }
       .card p {
         color: var(--muted);
@@ -194,6 +188,7 @@
         align-items: center;
         justify-content: center;
         padding: 20px;
+        z-index: 9999;
       }
       .modal-content {
         background: var(--card);
@@ -202,11 +197,9 @@
         max-width: 500px;
         width: 100%;
         border: 1px solid var(--border);
-      }
-      .modal-content img {
-        width: 100%;
-        border-radius: 12px;
-        margin-bottom: 15px;
+        color: var(--text);
+        overflow-y: auto;
+        max-height: 90vh;
       }
       .modal-content hr {
         border-color: var(--border);
@@ -216,6 +209,8 @@
         float: right;
         cursor: pointer;
         font-weight: bold;
+        font-size: 22px;
+        user-select: none;
       }
 
       /* ================= FOOTER ================= */
@@ -281,19 +276,6 @@
     <script>
       /* ================= DATA ================= */
       const vendors = [
-        /*{
-                  nombre: "Óptica Visión",                         // Nombre del vendor
-                  categoria: "Health & Wellness | Salud y Bienestar", // Categoría exacta (coincide con el <select>)
-                  descuento: "25% OFF",                             // Beneficio principal
-                  descripcion: "Descuento en lentes graduados y de sol para colaboradores.", // Descripción corta
-                  vigencia: "31 Dic 2026",                          // Vigencia del convenio
-                  destacado: true,                                  // true = resalta borde especial
-                  imagen: "assets/img/optica.png",                 // Ruta de la imagen del vendor
-                  contactoNombre: "Renzo Bourrouet",               // Nombre de la persona de contacto
-                  contacto: "contacto@optica.com | +506 8888-8888", // Correo / teléfono
-                  restricciones: "Aplicable solo una vez por colaborador.", // Restricciones del convenio
-                  requisitos: "Presentar carnet de empleado activo."       // Requisitos para el colaborador
-              }*/
         {
           nombre: "UNIVERSIDAD CENFOTEC",
           categoria: "Learning & Education | Aprendizaje y Educación",
@@ -338,18 +320,15 @@
           if (v.destacado) card.classList.add("featured");
           card.innerHTML = `
             <div>
-              <img src="${v.imagen}" alt="${v.nombre}">
               <div class="badge">${v.categoria}</div>
               <h3>${v.nombre}</h3>
               <div class="discount">${v.descuento}</div>
-              <p>${v.descripcion}</p>
+              <p>${v.descripcion.length > 100 ? v.descripcion.slice(0, 100) + "..." : v.descripcion}</p>
               <p><strong>Vigencia:</strong> ${v.vigencia}</p>
             </div>
             <button class="action-btn">Ver Detalle</button>
           `;
-          card
-            .querySelector("button")
-            .addEventListener("click", () => openModal(v));
+          card.querySelector("button").addEventListener("click", () => openModal(v));
           container.appendChild(card);
         });
       }
@@ -375,31 +354,31 @@
 
       function openModal(v) {
         modal.innerHTML = `
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">✖</span>
-      <h3>${v.nombre}</h3>
+          <div class="modal-content">
+            <span class="close" onclick="closeModal()">✖</span>
+            <h3>${v.nombre}</h3>
 
-      <p><strong>Categoría:</strong> ${v.categoria}</p>
-      <p><strong>Beneficio:</strong> <span style="color: var(--brand); font-weight: 700;">${v.descuento}</span></p>
-      <p>${v.descripcion}</p>
-      <p><strong>Vigencia:</strong> ${v.vigencia}</p>
+            <p><strong>Categoría:</strong> ${v.categoria}</p>
+            <p><strong>Beneficio:</strong> <span style="color: var(--brand); font-weight: 700;">${v.descuento}</span></p>
+            <p>${v.descripcion}</p>
+            <p><strong>Vigencia:</strong> ${v.vigencia}</p>
 
-      <hr>
+            <hr>
 
-      <p><strong>Contacto(s):</strong></p>
-      <p>${v.contactoNombre
-        .split(",")
-        .map((name) => name.trim())
-        .join("<br>")}</p>
-      <p><strong>Email / Teléfono:</strong></p>
-      <p>${v.contacto.replace(/\|/g, "<br>")}</p>
+            <p><strong>Contacto(s):</strong></p>
+            <p>${v.contactoNombre
+              .split(",")
+              .map((name) => name.trim())
+              .join("<br>")}</p>
+            <p><strong>Email / Teléfono:</strong></p>
+            <p>${v.contacto.replace(/\|/g, "<br>")}</p>
 
-      <hr>
+            <hr>
 
-      <p><strong>Restricciones:</strong> ${v.restricciones}</p>
-      <p><strong>Requisitos:</strong> ${v.requisitos}</p>
-    </div>
-  `;
+            <p><strong>Restricciones:</strong> ${v.restricciones}</p>
+            <p><strong>Requisitos:</strong> ${v.requisitos}</p>
+          </div>
+        `;
         modal.style.display = "flex";
       }
 
