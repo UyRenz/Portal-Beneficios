@@ -320,13 +320,13 @@
           if (v.destacado) card.classList.add("featured");
           card.innerHTML = `
             <div>
-            <div class="badge">${v.categoria}</div>
-            <h3>${v.nombre}</h3>
-             <div class="discount">${v.descuento}</div>
+                <div class="badge">${v.categoria}</div>
+                <h3>${v.nombre}</h3>
+                <div class="discount">${v.descuento}</div>
             </div>
+            <p style="font-size: 14px; color: var(--muted); margin: 12px 0 0;"><strong>Vigencia:</strong> ${v.vigencia}</p>
             <button class="action-btn">Ver Detalle</button>
-            <p style="margin-top:auto; font-size: 14px; color: var(--muted);"><strong>Vigencia:</strong> ${v.vigencia}</p>
-            `;
+         `;
           card
             .querySelector("button")
             .addEventListener("click", () => openModal(v));
