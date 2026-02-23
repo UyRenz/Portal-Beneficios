@@ -323,7 +323,6 @@
               <div class="badge">${v.categoria}</div>
               <h3>${v.nombre}</h3>
               <div class="discount">${v.descuento}</div>
-              <p>${v.descripcion.length > 100 ? v.descripcion.slice(0, 100) + "..." : v.descripcion}</p>
               <p><strong>Vigencia:</strong> ${v.vigencia}</p>
             </div>
             <button class="action-btn">Ver Detalle</button>
@@ -376,6 +375,9 @@
             <hr>
 
             <p><strong>Restricciones:</strong> ${v.restricciones}</p>
+
+            <hr>
+            
             <p><strong>Requisitos:</strong> ${v.requisitos}</p>
           </div>
         `;
