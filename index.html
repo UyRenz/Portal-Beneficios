@@ -279,9 +279,9 @@
     <footer>© <span id="year"></span> Power Design CR - Portal Interno</footer>
 
     <script>
-            /* ================= DATA ================= */
-            const vendors = [
-              /*{
+      /* ================= DATA ================= */
+      const vendors = [
+        /*{
                   nombre: "Óptica Visión",                         // Nombre del vendor
                   categoria: "Health & Wellness | Salud y Bienestar", // Categoría exacta (coincide con el <select>)
                   descuento: "25% OFF",                             // Beneficio principal
@@ -294,44 +294,49 @@
                   restricciones: "Aplicable solo una vez por colaborador.", // Restricciones del convenio
                   requisitos: "Presentar carnet de empleado activo."       // Requisitos para el colaborador
               }*/
-              {
-                nombre: "UNIVERSIDAD CENFOTEC",
-                categoria: "Learning & Education | Aprendizaje y Educación",
-                descuento: "5%, 10%, 15% OFF",
-                descripcion:"Continuing Education / Short Courses (Cursos Libres): Academic Programs (Careers & Degrees) 1 employee: 5% discount, 2–3 employees: 10% discount, More than 3 employees: 15% discount",
-                vigencia: "03 Feb 2027",
-                destacado: false,
-                contactoNombre: "Magally Vasquex, Reichell Brizuela Calderón",
-                contacto:"b2b@ucenfotec.ac.cr | mvasquez@ucenfotec.ac.cr | rbrizuela@ucenfotec.ac.cr",
-                restricciones:"The discount applies only to course tuition. It does not apply to: Registration fees, Administrative fees, TecnoFee, External certification exams, English courses are excluded from this benefit. Discounts cannot be combined with other CENFOTEC promotions or benefits. The benefit is non-transferable and does not apply to family members. Does not apply to customized corporate programs managed by CENFOTEC B2B",
-                requisitos: "Copy of company ID",
-              },
-              {
-                nombre: "Hotel Best Western Jaco",
-                categoria: "Travel & Leisure | Viajes y Recreación",
-                descuento: "20% discount off the public rate at Best Western Jacó Hotel.",
-                descripcion: "Precio especial en membresía anual corporativa.",
-                vigencia: "31 Diciembre 2027",
-                destacado: false,
-                contactoNombre: "Karen Madrigal",
-                contacto: "corporativo1@gmhospitality.net | asistenciaventas@gmhospitality.net | corporativo@gmhospitality.net | +506 6069-5469 | +506 2106-5111",
-                restricciones: "N/a",
-                requisitos: "Copy of company ID",
-              },
-            ];
+        {
+          nombre: "UNIVERSIDAD CENFOTEC",
+          categoria: "Learning & Education | Aprendizaje y Educación",
+          descuento: "5%, 10%, 15% OFF",
+          descripcion:
+            "Continuing Education / Short Courses (Cursos Libres): Academic Programs (Careers & Degrees) 1 employee: 5% discount, 2–3 employees: 10% discount, More than 3 employees: 15% discount",
+          vigencia: "03 Feb 2027",
+          destacado: false,
+          contactoNombre: "Magally Vasquex, Reichell Brizuela Calderón",
+          contacto:
+            "b2b@ucenfotec.ac.cr | mvasquez@ucenfotec.ac.cr | rbrizuela@ucenfotec.ac.cr",
+          restricciones:
+            "The discount applies only to course tuition. It does not apply to: Registration fees, Administrative fees, TecnoFee, External certification exams, English courses are excluded from this benefit. Discounts cannot be combined with other CENFOTEC promotions or benefits. The benefit is non-transferable and does not apply to family members. Does not apply to customized corporate programs managed by CENFOTEC B2B",
+          requisitos: "Copy of company ID",
+        },
+        {
+          nombre: "Hotel Best Western Jaco",
+          categoria: "Travel & Leisure | Viajes y Recreación",
+          descuento:
+            "20% discount off the public rate at Best Western Jacó Hotel.",
+          descripcion: "Precio especial en membresía anual corporativa.",
+          vigencia: "31 Diciembre 2027",
+          destacado: false,
+          contactoNombre: "Karen Madrigal",
+          contacto:
+            "corporativo1@gmhospitality.net | asistenciaventas@gmhospitality.net | corporativo@gmhospitality.net | +506 6069-5469 | +506 2106-5111",
+          restricciones: "N/a",
+          requisitos: "Copy of company ID",
+        },
+      ];
 
-            /* ================= RENDER ================= */
-            const container = document.getElementById("vendorContainer");
-            const searchInput = document.getElementById("searchInput");
-            const categoryFilter = document.getElementById("categoryFilter");
+      /* ================= RENDER ================= */
+      const container = document.getElementById("vendorContainer");
+      const searchInput = document.getElementById("searchInput");
+      const categoryFilter = document.getElementById("categoryFilter");
 
-            function render(list) {
-              container.innerHTML = "";
-              list.forEach((v) => {
-                const card = document.createElement("div");
-                card.className = "card";
-                if (v.destacado) card.classList.add("featured");
-                card.innerHTML = `
+      function render(list) {
+        container.innerHTML = "";
+        list.forEach((v) => {
+          const card = document.createElement("div");
+          card.className = "card";
+          if (v.destacado) card.classList.add("featured");
+          card.innerHTML = `
             <div>
               <img src="${v.imagen}" alt="${v.nombre}">
               <div class="badge">${v.categoria}</div>
@@ -342,77 +347,83 @@
             </div>
             <button class="action-btn">Ver Detalle</button>
           `;
-                card
-                  .querySelector("button")
-                  .addEventListener("click", () => openModal(v));
-                container.appendChild(card);
-              });
-            }
+          card
+            .querySelector("button")
+            .addEventListener("click", () => openModal(v));
+          container.appendChild(card);
+        });
+      }
 
-            function filter() {
-              const text = searchInput.value.toLowerCase();
-              const cat = categoryFilter.value;
-              const filtered = vendors.filter((v) => {
-                const matchText = v.nombre.toLowerCase().includes(text);
-                const matchCat = cat === "all" || v.categoria === cat;
-                return matchText && matchCat;
-              });
-              render(filtered);
-            }
+      function filter() {
+        const text = searchInput.value.toLowerCase();
+        const cat = categoryFilter.value;
+        const filtered = vendors.filter((v) => {
+          const matchText = v.nombre.toLowerCase().includes(text);
+          const matchCat = cat === "all" || v.categoria === cat;
+          return matchText && matchCat;
+        });
+        render(filtered);
+      }
 
-            searchInput.addEventListener("input", filter);
-            categoryFilter.addEventListener("change", filter);
+      searchInput.addEventListener("input", filter);
+      categoryFilter.addEventListener("change", filter);
 
-            render(vendors);
+      render(vendors);
 
-            /* ================= MODAL ================= */
-            const modal = document.getElementById("modal");
-            function openModal(v) {
-              modal.innerHTML = `
-          <div class="modal-content">
-        <span class="close" onclick="closeModal()">✖</span>
-        <img src="${v.imagen}" alt="${v.nombre}">
-        <h3>${v.nombre}</h3>
+      /* ================= MODAL ================= */
+      const modal = document.getElementById("modal");
 
-        <p><strong>Categoría:</strong> ${v.categoria}</p>
-        <p><strong>Beneficio:</strong> ${v.descuento}</p>
-        <p>${v.descripcion}</p>
-        <p><strong>Vigencia:</strong> ${v.vigencia}</p>
+      function openModal(v) {
+        modal.innerHTML = `
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">✖</span>
+      <h3>${v.nombre}</h3>
 
-        <hr>
+      <p><strong>Categoría:</strong> ${v.categoria}</p>
+      <p><strong>Beneficio:</strong> <span style="color: var(--brand); font-weight: 700;">${v.descuento}</span></p>
+      <p>${v.descripcion}</p>
+      <p><strong>Vigencia:</strong> ${v.vigencia}</p>
 
-        <p><strong>Contacto:</strong> ${v.contactoNombre}</p>
-        <p><strong>Email / Teléfono:</strong> ${v.contacto}</p>
+      <hr>
 
-        <hr>
+      <p><strong>Contacto(s):</strong></p>
+      <p>${v.contactoNombre
+        .split(",")
+        .map((name) => name.trim())
+        .join("<br>")}</p>
+      <p><strong>Email / Teléfono:</strong></p>
+      <p>${v.contacto.replace(/\|/g, "<br>")}</p>
 
-        <p><strong>Restricciones:</strong> ${v.restricciones}</p>
-        <p><strong>Requisitos:</strong> ${v.requisitos}</p>
-      </div>
-        `;
-              modal.style.display = "flex";
-            }
-            function closeModal() {
-              modal.style.display = "none";
-            }
+      <hr>
 
-            /* ================= THEME ================= */
-            (function () {
-              const root = document.documentElement;
-              const saved = localStorage.getItem("theme");
-              if (saved === "light") root.classList.add("light");
-              const toggle = document.querySelector(".theme-toggle");
-              toggle.addEventListener("click", () => {
-                root.classList.toggle("light");
-                localStorage.setItem(
-                  "theme",
-                  root.classList.contains("light") ? "light" : "dark",
-                );
-              });
-            })();
+      <p><strong>Restricciones:</strong> ${v.restricciones}</p>
+      <p><strong>Requisitos:</strong> ${v.requisitos}</p>
+    </div>
+  `;
+        modal.style.display = "flex";
+      }
 
-            /* ================= YEAR ================= */
-            document.getElementById("year").textContent = new Date().getFullYear();
+      function closeModal() {
+        modal.style.display = "none";
+      }
+
+      /* ================= THEME ================= */
+      (function () {
+        const root = document.documentElement;
+        const saved = localStorage.getItem("theme");
+        if (saved === "light") root.classList.add("light");
+        const toggle = document.querySelector(".theme-toggle");
+        toggle.addEventListener("click", () => {
+          root.classList.toggle("light");
+          localStorage.setItem(
+            "theme",
+            root.classList.contains("light") ? "light" : "dark",
+          );
+        });
+      })();
+
+      /* ================= YEAR ================= */
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
