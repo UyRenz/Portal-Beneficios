@@ -222,10 +222,22 @@
     <script>
       /* ================= DATA ================= */
       const vendors = [
+        /*{
+          nombre: "",
+          categoria: "",
+          descuento: "",
+          vigencia: "",
+          destacado: false,
+          contactoNombre: "",
+          contacto: "",
+          restricciones: "",
+          requisitos: "",
+        },*/
         {
           nombre: "UNIVERSIDAD CENFOTEC",
           categoria: "Learning & Education | Aprendizaje y Educación",
           descuento: "5%, 10%, 15% OFF",
+          beneficio: "Continuing Education / Short Courses (Cursos Libres): Academic Programs (Careers & Degrees) 1 employee: 5% discount, 2–3 employees: 10% discount, More than 3 employees: 15% discount",
           vigencia: "03 Feb 2027",
           destacado: false,
           contactoNombre: "Magally Vasquez, Reichell Brizuela Calderón",
@@ -247,6 +259,18 @@
           restricciones: "N/a",
           requisitos: "Copia de cédula de empleado.",
         },
+        {
+          nombre: "Barceló",
+          categoria: "Travel & Leisure | Viajes y Recreación",
+          descuento: "",
+          vigencia: "",
+          destacado: false,
+          contactoNombre: "",
+          contacto: "",
+          restricciones: "",
+          requisitos: "",
+        },
+        
       ];
 
       /* ================= RENDER ================= */
@@ -297,7 +321,8 @@
           <span class="close" onclick="closeModal()">✖</span>
           <h3>${v.nombre}</h3>
           <p><strong>Categoría:</strong> ${v.categoria}</p>
-          <p><strong>Beneficio:</strong> <span style="color: var(--brand); font-weight: 700;">${v.descuento}</span></p>
+          <p><strong>Descuento:</strong> <span style="color: var(--brand); font-weight: 700;">${v.descuento}</span></p>
+          <p><strong>Beneficio:</strong> ${v.beneficio}</p>
           <p><strong>Vigencia:</strong> ${v.vigencia}</p>
           <hr>
           <p><strong>Contacto(s):</strong></p>
