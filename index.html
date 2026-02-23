@@ -33,6 +33,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
@@ -64,8 +65,14 @@ h1{font-size:20px}
   border:1px solid var(--border);
   color:var(--text);
   padding:8px 12px;
-  border-radius:8px;
+  border-radius:10px;
   cursor:pointer;
+  font-size:18px;
+  transition:.2s ease;
+}
+
+.theme-toggle:hover{
+  transform:scale(1.1);
 }
 
 /* ================= HERO ================= */
@@ -146,6 +153,14 @@ h1{font-size:20px}
   font-size:14px;
 }
 
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:12px;
+}
+
 button{
   margin-top:16px;
   padding:10px;
@@ -183,6 +198,12 @@ button{
   border:1px solid var(--border);
 }
 
+.modal-content img{
+  width:100%;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
 .close{
   float:right;
   cursor:pointer;
@@ -204,7 +225,7 @@ footer{
 <header>
   <div class="container header-content">
     <h1>Power Design CR</h1>
-    <button class="theme-toggle">Cambiar tema</button>
+    <button class="theme-toggle" id="themeToggle">🌙</button>
   </div>
 </header>
 
@@ -249,7 +270,8 @@ const vendors = [
     descuento:"25% OFF",
     descripcion:"Descuento en lentes graduados y de sol para colaboradores.",
     vigencia:"31 Dic 2026",
-    destacado:true
+    destacado:true,
+    imagen:"assets/img/optica.png"
   },
   {
     nombre:"Smart Fit",
@@ -257,7 +279,8 @@ const vendors = [
     descuento:"Tarifa Corporativa",
     descripcion:"Precio especial en membresía anual corporativa.",
     vigencia:"Sin límite",
-    destacado:false
+    destacado:false,
+    imagen:"assets/img/smartfit.jpg"
   },
   {
     nombre:"Pizza Factory",
@@ -265,7 +288,8 @@ const vendors = [
     descuento:"2x1",
     descripcion:"2x1 en pizzas medianas todos los miércoles.",
     vigencia:"30 Jun 2026",
-    destacado:false
+    destacado:false,
+    imagen:"assets/img/pizza.jpg"
   }
 ];
 
@@ -283,6 +307,7 @@ function render(list){
 
     card.innerHTML=`
       <div>
+        <img src="${v.imagen}" alt="${v.nombre}">
         <div class="badge">${v.categoria}</div>
         <h3>${v.nombre}</h3>
         <div class="discount">${v.descuento}</div>
@@ -322,12 +347,12 @@ function openModal(v){
   modal.innerHTML=`
     <div class="modal-content">
       <span class="close" onclick="closeModal()">✖</span>
+      <img src="${v.imagen}">
       <h3>${v.nombre}</h3>
       <p><strong>Categoría:</strong> ${v.categoria}</p>
       <p><strong>Beneficio:</strong> ${v.descuento}</p>
       <p>${v.descripcion}</p>
       <p><strong>Vigencia:</strong> ${v.vigencia}</p>
-      <button style="margin-top:16px;">Ir al Convenio</button>
     </div>
   `;
   modal.style.display="flex";
@@ -338,16 +363,26 @@ function closeModal(){
 }
 
 /* ================= THEME ================= */
-const toggle=document.querySelector(".theme-toggle");
-const root=document.documentElement;
+const toggle = document.getElementById("themeToggle");
+const root = document.documentElement;
 
 if(localStorage.getItem("theme")==="light"){
   root.classList.add("light");
+  toggle.textContent="☀";
+}else{
+  toggle.textContent="🌙";
 }
 
 toggle.addEventListener("click",()=>{
   root.classList.toggle("light");
-  localStorage.setItem("theme",root.classList.contains("light")?"light":"dark");
+
+  if(root.classList.contains("light")){
+    localStorage.setItem("theme","light");
+    toggle.textContent="☀";
+  }else{
+    localStorage.setItem("theme","dark");
+    toggle.textContent="🌙";
+  }
 });
 
 /* ================= YEAR ================= */
