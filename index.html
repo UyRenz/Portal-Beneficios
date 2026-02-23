@@ -320,14 +320,16 @@
           if (v.destacado) card.classList.add("featured");
           card.innerHTML = `
             <div>
-              <div class="badge">${v.categoria}</div>
-              <h3>${v.nombre}</h3>
-              <div class="discount">${v.descuento}</div>
-              <p><strong>Vigencia:</strong> ${v.vigencia}</p>
+            <div class="badge">${v.categoria}</div>
+            <h3>${v.nombre}</h3>
+             <div class="discount">${v.descuento}</div>
             </div>
             <button class="action-btn">Ver Detalle</button>
-          `;
-          card.querySelector("button").addEventListener("click", () => openModal(v));
+            <p style="margin-top:auto; font-size: 14px; color: var(--muted);"><strong>Vigencia:</strong> ${v.vigencia}</p>
+            `;
+          card
+            .querySelector("button")
+            .addEventListener("click", () => openModal(v));
           container.appendChild(card);
         });
       }
@@ -377,7 +379,7 @@
             <p><strong>Restricciones:</strong> ${v.restricciones}</p>
 
             <hr>
-            
+
             <p><strong>Requisitos:</strong> ${v.requisitos}</p>
           </div>
         `;
