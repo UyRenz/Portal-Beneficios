@@ -214,18 +214,58 @@
         text-align: center;
         color: var(--muted);
       }
+      .header-content {
+  position: relative; /* Para posicionar el botón centrado */
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* mantiene título y toggle en extremos */
+}
+
+/* Solo este botón va a posicionarse centrado */
+.suggestion-btn-header {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #f1a863, #16d0ec);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  border: none;
+  height: 44px;
+  line-height: 1;
+  z-index: 2; /* Para que quede arriba del header */
+}
+
+.suggestion-btn-header:hover {
+  transform: translateX(-50%) scale(1.05);
+  box-shadow: 0 6px 15px rgba(34, 211, 238, 0.4);
+}
     </style>
   </head>
   <body>
-    <header>
-      <div class="container header-content">
-        <h1>Power Design CR</h1>
-        <button class="theme-toggle" aria-label="Cambiar tema">
-          <span class="sun">☀️</span>
-          <span class="moon">🌙</span>
-        </button>
-      </div>
-    </header>
+<header>
+  <div class="container header-content">
+    <h1>Power Design CR</h1>
+
+    <a href="https://forms.cloud.microsoft/Pages/ResponsePage.aspx?id=yHaPGqjsh0WkAhOpfxQVy1zjqkvKuzRJg1pnAUMOprFUNE5DVUNQR1k0WE5TWEtNVjVUOENERkFFUi4u" target="_blank" class="suggestion-btn-header" aria-label="Sugerir un nuevo convenio">
+      💡 Sugerir un nuevo convenio
+    </a>
+
+    <button class="theme-toggle" aria-label="Cambiar tema">
+      <span class="sun">☀️</span>
+      <span class="moon">🌙</span>
+    </button>
+  </div>
+</header>
 
     <section class="hero">
       <div class="container">
@@ -270,7 +310,7 @@
     <script>
       /* ================= DATA ================= */
       const vendors = [
-        /*{
+       /*{
           nombre: "",
           categoria: "",
           descuento: "",
